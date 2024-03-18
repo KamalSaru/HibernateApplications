@@ -1,0 +1,14 @@
+
+
+/*
+    Pagination
+
+    100
+    Example 1: pageNumber=1, pageSize=20 -> 0th index to 19th index
+    Example 2: pageNumber=3, pageSize=15 -> 30th index to 45th index
+    Example 3: pageNumber=5, pageSize=10 -> 40th index to 49th index
+    Example 4: pageNumber 3, pageSize=40 -> 79th index to 99th index
+
+    0-9, 10-19, 20-29, 30-39, 40-49
+
+     */

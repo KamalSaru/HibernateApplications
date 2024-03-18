@@ -15,6 +15,7 @@ public class EmployeeDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long ID;
+    @Column(name = "emp_BatchID")
     private Long empBatchID;
     private String firstName;
     private String lastName;
@@ -34,8 +35,8 @@ public class EmployeeDTO {
     }
 
     private String position;
+    @Column(name = "phone_number")
     private Long phoneNumber;
-
     private String email;
     private String address;
     private String gender;

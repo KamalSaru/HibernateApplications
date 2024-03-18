@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeDTO, Long> {
-    //@GetMapping-----Search/find employee details using @Request param-------------
     //In Postman---http://localhost:8080/employee/search/------------
 
+    //@GetMapping-----Search/find employee details using first name-------------
     List<EmployeeDTO>findByFirstName(String firstName);
 
     EmployeeDTO findByEmpBatchID(Long empBatchID);

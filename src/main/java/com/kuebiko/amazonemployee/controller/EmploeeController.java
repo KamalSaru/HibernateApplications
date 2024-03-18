@@ -32,9 +32,24 @@ public class EmploeeController {
         return new ResponseEntity<>(employeeService.getAllEmployeeDetails(),HttpStatus.OK);
     }
 
-
     @GetMapping(value = "/employee/action/get-by-id")
+    //Getmapping---find the employee details using empBatchID--@Request param empBatchID
+    //http://localhost:8080/employee/action/get-by-id---Request Param --empBatchID-101
     public ResponseEntity<?>getEmployeeByEmpBatchID(@RequestParam Long empBatchID){
         return  new ResponseEntity<>(employeeService.getEmployeeByEmpBatchID(empBatchID), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/employee/action/get-by-id/{empBatchID}")
+    //@GetMapping----getting method using empBatchID-------------------
+    //In PostMan------http://localhost:8080/employee/action/get-by-id/102
+    public ResponseEntity<?>getEmployeeDetailsByEmpBatchID(@PathVariable("empBatchID") Long empBatchID){
+        return ResponseEntity.ok(employeeService.getEmployeeDetailsByEmpBatchID(empBatchID));
+    }
+
+    @GetMapping(value = "/employee/action/search/{firstName}")
+    //@GetMapping-----Search/find employee details using first name-------------
+    //In Postman---http://localhost:8080/employee/action/search/kamal
+    public ResponseEntity<List<EmployeeDTO>>searchEmployeeByFirstName(@PathVariable("firstName") String firstName){
+        return ResponseEntity.ok(employeeService.searchByEmployeeFirstName(firstName));
     }
 }
