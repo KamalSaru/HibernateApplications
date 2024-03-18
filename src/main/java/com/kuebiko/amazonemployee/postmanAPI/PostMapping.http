@@ -1,0 +1,15 @@
+
+
+
+POST http://localhost:8080/employee/action/insert
+{
+    "empBatchID": 102,
+    "firstName": "Kamal",
+    "lastName": "Saru",
+    "dob": "1989-01-01",
+    "position": "Software Engineer",
+    "phoneNumber": 1234567812,
+    "email": "kamal@gmail.com",
+    "address": "Baltimore, MD",
+    "gender": "Male"
+}

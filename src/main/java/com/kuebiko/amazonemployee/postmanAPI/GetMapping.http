@@ -1,0 +1,33 @@
+
+//Logic calculate the age----
+
+GET http://localhost:8080/employee/action/get-all
+
+[
+    {
+        "empBatchID": 101,
+        "firstName": "John",
+        "lastName": "Doe",
+        "dob": "1990-01-01",
+        "age": 34,
+        "position": "Software Engineer",
+        "phoneNumber": 1234567890,
+        "email": "john.doe@example.com",
+        "address": "123 Main St, City",
+        "gender": "Male",
+        "id": 1
+    },
+    {
+        "empBatchID": 102,
+        "firstName": "Kamal",
+        "lastName": "Saru",
+        "dob": "1989-01-01",
+        "age": 35,
+        "position": "Software Engineer",
+        "phoneNumber": 1234567812,
+        "email": "kamal@gmail.com",
+        "address": "Baltimore, MD",
+        "gender": "Male",
+        "id": 2
+    }
+]
