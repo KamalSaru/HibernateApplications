@@ -57,11 +57,14 @@ public class EmploeeController {
     //@DeleteMapping-----Delete customer using ID------------------------
     //http://localhost:8080/employee/action/delete/5
     public ResponseEntity<?>deleteByID(@PathVariable("ID") Long ID) {
-        boolean deleted = employeeService.deleteEmployeeByID(ID);
-        if (deleted) {
-            return ResponseEntity.ok("Employee with ID " + ID + " deleted successfully.");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee with ID " + ID + " not found.");
-        }
+        return ResponseEntity.ok(employeeService.deleteEmployeeByID(ID));
+    }
+
+
+    @PutMapping(value = "employee/action/update/{ID}")
+    //@Putmapping----get the employee details first using ID and update the details----
+    //http://localhost:8080/employee/action/update/9
+    public ResponseEntity<String>updateEmployeeDetails(@RequestBody EmployeeDTO employeeDTO, @PathVariable("ID") Long ID){
+        return ResponseEntity.ok(employeeService.updateEmployeeDetails(employeeDTO, ID));
     }
 }

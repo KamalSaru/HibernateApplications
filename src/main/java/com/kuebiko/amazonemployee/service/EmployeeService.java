@@ -58,17 +58,38 @@ public class EmployeeService {
     }
 
     //@DeleteMapping-----Delete employee using ID------------------------
-    public boolean deleteEmployeeByID(Long ID) {
+    public String deleteEmployeeByID(Long ID) {
         Optional<EmployeeDTO> employeeDTOOptional = employeeRepository.findById(ID);
         if (employeeDTOOptional.isPresent()) {
             employeeRepository.deleteById(ID);
-            System.out.println("Employee with ID " + ID + " deleted successfully.");
+            return ("Employee with ID number " + ID + " deleted successfully.");
         } else {
-            System.out.println("Employee with ID " + ID +  " not found.");
+            return ("Employee with ID number " + ID +  " doesn't exit.");
         }
-        return true;
     }
 
-    //@PutMapping-----Edit/Update details using ID--------
 
+    //@PutMapping-----Edit/Update details using ID--------
+    public String updateEmployeeDetails(EmployeeDTO updateEmployeeInfo, Long ID){
+        Optional<EmployeeDTO> employeeOptional = employeeRepository.findById(ID);
+        if (employeeOptional.isPresent()){
+            EmployeeDTO employeeDTO = employeeOptional.get();
+            employeeDTO.setEmpBatchID(updateEmployeeInfo.getEmpBatchID());
+            employeeDTO.setFirstName(updateEmployeeInfo.getFirstName());
+            employeeDTO.setLastName(updateEmployeeInfo.getLastName());
+            employeeDTO.setDob(updateEmployeeInfo.getDob());
+            //employeeDTO.setAge(updateEmployeeInfo.getAge());
+            employeeDTO.setPosition(updateEmployeeInfo.getPosition());
+            employeeDTO.setPhoneNumber(updateEmployeeInfo.getPhoneNumber());
+            employeeDTO.setEmail(updateEmployeeInfo.getEmail());
+            employeeDTO.setAddress(updateEmployeeInfo.getAddress());
+            employeeDTO.setGender(updateEmployeeInfo.getGender());
+
+            //Save the details-----
+            employeeRepository.save(employeeDTO);
+            return "Employee with ID number "+ID + " updated successfully.";
+        } else {
+            return "Employee with ID number "+ID +" doesn't exit.";
+        }
+    }
 }
