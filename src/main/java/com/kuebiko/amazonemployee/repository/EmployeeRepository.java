@@ -1,6 +1,6 @@
 package com.kuebiko.amazonemployee.repository;
 
-import com.kuebiko.amazonemployee.dto.EmployeeDTO;
+import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

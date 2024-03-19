@@ -1,7 +1,7 @@
 package com.kuebiko.amazonemployee.controller;
 
 
-import com.kuebiko.amazonemployee.dto.EmployeeDTO;
+import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,10 +61,20 @@ public class EmploeeController {
     }
 
 
-    @PutMapping(value = "employee/action/update/{ID}")
+    @PutMapping(value = "/employee/action/update/{ID}")
     //@Putmapping----get the employee details first using ID and update the details----
     //http://localhost:8080/employee/action/update/9
     public ResponseEntity<String>updateEmployeeDetails(@RequestBody EmployeeDTO employeeDTO, @PathVariable("ID") Long ID){
         return ResponseEntity.ok(employeeService.updateEmployeeDetails(employeeDTO, ID));
     }
+
+
+    //@PatchMapping----------Patch method use to update partial field in the column(Replace update data)-------
+    //First get Details using ID, CopyPaste, update necessary field and Patch the data--------
+    //http://localhost:8080/employee/action/update/field/7
+    @PatchMapping(value = "/employee/action/update/field/{ID}")
+    public ResponseEntity<String>updateEmpDetailsPartially(@RequestBody EmployeeDTO employeeDTO, @PathVariable("ID") Long ID){
+        return ResponseEntity.ok(employeeService.updateEmployeeDetails(employeeDTO,ID));
+    }
+
 }

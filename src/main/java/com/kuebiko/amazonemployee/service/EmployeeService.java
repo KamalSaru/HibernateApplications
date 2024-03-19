@@ -1,10 +1,13 @@
 package com.kuebiko.amazonemployee.service;
 
-import com.kuebiko.amazonemployee.dto.EmployeeDTO;
+import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +27,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    //Getmapping---find the employee details using empBatchID--@Request param empBatchID
+    //@Getmapping---find the employee details using empBatchID--@Request param empBatchID
     public Employee getEmployeeByEmpBatchID(Long empBatchID){
         EmployeeDTO employeeDTO=employeeRepository.findByEmpBatchID(empBatchID);
         Employee employee=new Employee();
@@ -61,7 +64,7 @@ public class EmployeeService {
     public String deleteEmployeeByID(Long ID) {
         Optional<EmployeeDTO> employeeDTOOptional = employeeRepository.findById(ID);
         if (employeeDTOOptional.isPresent()) {
-            employeeRepository.deleteById(ID);
+            employeeRepository.deleteById(ID);//Delete ny ID
             return ("Employee with ID number " + ID + " deleted successfully.");
         } else {
             return ("Employee with ID number " + ID +  " doesn't exit.");
@@ -90,6 +93,50 @@ public class EmployeeService {
             return "Employee with ID number "+ID + " updated successfully.";
         } else {
             return "Employee with ID number "+ID +" doesn't exit.";
+        }
+    }
+
+    //@PatchMapping----------Patch method use to update partial field in the column(Replace update data)-------
+    public String updateEmpDetailsPartially(@RequestBody EmployeeDTO updateEmployeeDetails, @PathVariable Long ID){
+        Optional<EmployeeDTO> employeeDTOOptional=employeeRepository.findById(ID);
+        if(employeeDTOOptional.isPresent()){
+            //Exist/catch data and update necessary field--------
+            EmployeeDTO existingEmployeeData =employeeDTOOptional.get();
+            if (updateEmployeeDetails.getEmpBatchID() !=null){
+                existingEmployeeData.setEmpBatchID(updateEmployeeDetails.getEmpBatchID());
+            }
+            if (updateEmployeeDetails.getFirstName() !=null){
+                existingEmployeeData.setFirstName(updateEmployeeDetails.getFirstName());
+            }
+            if (updateEmployeeDetails.getLastName() !=null){
+                existingEmployeeData.setLastName(updateEmployeeDetails.getLastName());
+            }
+            if (updateEmployeeDetails.getDob() !=null){
+                existingEmployeeData.setDob(updateEmployeeDetails.getDob());
+            }
+            if (updateEmployeeDetails.getAge() !=null){
+                existingEmployeeData.setAge(updateEmployeeDetails.getAge());
+            }
+            if (updateEmployeeDetails.getPosition() !=null){
+                existingEmployeeData.setPosition(updateEmployeeDetails.getPosition());
+            }
+            if (updateEmployeeDetails.getPhoneNumber() !=null){
+                existingEmployeeData.setPhoneNumber(updateEmployeeDetails.getPhoneNumber());
+            }
+            if (updateEmployeeDetails.getEmail() !=null){
+                existingEmployeeData.setEmail(updateEmployeeDetails.getEmail());
+            }
+            if (updateEmployeeDetails.getAddress() !=null){
+                existingEmployeeData.setAddress(updateEmployeeDetails.getAddress());
+            }
+            if (updateEmployeeDetails.getGender() !=null){
+                existingEmployeeData.setGender(updateEmployeeDetails.getGender());
+            }
+            //Save data after updating------
+            employeeRepository.save(existingEmployeeData);
+            return "Employee with ID number " + ID +" fields are successfully updated.";
+        } else {
+            return "Employee with ID number "+ID + "doesn't exist";
         }
     }
 }

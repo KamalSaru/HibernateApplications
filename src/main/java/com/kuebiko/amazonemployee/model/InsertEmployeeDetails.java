@@ -1,53 +1,19 @@
-package com.kuebiko.amazonemployee.dto;
+package com.kuebiko.amazonemployee.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 
+public class InsertEmployeeDetails {
 
-@Entity
-@Table(schema = "amazon_company", name="employee")
-
-public class EmployeeDTO {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long ID;
-    @Column(name = "emp_BatchID")
     private Long empBatchID;
     private String firstName;
     private String lastName;
-    @Column(name="date_of_birth")
-    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dob;
-
-    @Transient //Age calculation
-    //@Temporal(TemporalType.TIMESTAMP)
-    //When getMapping we can see the age in year(2023-2000=23)--------------------
     private Integer age;
-    public Integer getAge() {
-        if (dob != null) {
-            return Period.between(dob, LocalDate.now()).getYears();
-        }
-        return null;
-    }
-
     private String position;
-    @Column(name = "phone_number")
     private Long phoneNumber;
     private String email;
     private String address;
     private String gender;
-
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
 
     public Long getEmpBatchID() {
         return empBatchID;
@@ -79,6 +45,10 @@ public class EmployeeDTO {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 
     public void setAge(Integer age) {
