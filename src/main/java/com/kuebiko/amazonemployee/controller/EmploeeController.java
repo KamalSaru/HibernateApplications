@@ -52,4 +52,16 @@ public class EmploeeController {
     public ResponseEntity<List<EmployeeDTO>>searchEmployeeByFirstName(@PathVariable("firstName") String firstName){
         return ResponseEntity.ok(employeeService.searchByEmployeeFirstName(firstName));
     }
+
+    @DeleteMapping(value = "/employee/action/delete/{ID}")
+    //@DeleteMapping-----Delete customer using ID------------------------
+    //http://localhost:8080/employee/action/delete/5
+    public ResponseEntity<?>deleteByID(@PathVariable("ID") Long ID) {
+        boolean deleted = employeeService.deleteEmployeeByID(ID);
+        if (deleted) {
+            return ResponseEntity.ok("Employee with ID " + ID + " deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee with ID " + ID + " not found.");
+        }
+    }
 }

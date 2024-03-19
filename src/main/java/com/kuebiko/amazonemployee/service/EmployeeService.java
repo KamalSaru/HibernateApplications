@@ -56,4 +56,19 @@ public class EmployeeService {
         employeeRepository.findByFirstName(firstName);
         return employeeRepository.findByFirstName(firstName);
     }
+
+    //@DeleteMapping-----Delete employee using ID------------------------
+    public boolean deleteEmployeeByID(Long ID) {
+        Optional<EmployeeDTO> employeeDTOOptional = employeeRepository.findById(ID);
+        if (employeeDTOOptional.isPresent()) {
+            employeeRepository.deleteById(ID);
+            System.out.println("Employee with ID " + ID + " deleted successfully.");
+        } else {
+            System.out.println("Employee with ID " + ID +  " not found.");
+        }
+        return true;
+    }
+
+    //@PutMapping-----Edit/Update details using ID--------
+
 }

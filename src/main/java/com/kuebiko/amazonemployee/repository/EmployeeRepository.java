@@ -14,8 +14,11 @@ public interface EmployeeRepository extends JpaRepository<EmployeeDTO, Long> {
     //@GetMapping-----Search/find employee details using first name-------------
     List<EmployeeDTO>findByFirstName(String firstName);
 
+    //@GetMapping----getting method using empBatchID-------------------
     EmployeeDTO findByEmpBatchID(Long empBatchID);
 
+
+    //@Request Param, @Request Path variable
     EmployeeDTO findByEmpBatchIDAndFirstName(Long empBatchID, String firstName);
 
 }
