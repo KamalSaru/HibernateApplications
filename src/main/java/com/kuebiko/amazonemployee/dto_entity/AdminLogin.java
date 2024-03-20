@@ -15,7 +15,7 @@ import lombok.*;
 public class AdminLogin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@GeneratedValue(strategy = GenerationType.AUTO, generator = "admin_ID_generator")
     //@SequenceGenerator(name ="admin_ID_generator", sequenceName = "admin_ID_sequence")
 

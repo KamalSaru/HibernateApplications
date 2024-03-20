@@ -4,10 +4,14 @@ import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -136,7 +140,40 @@ public class EmployeeService {
             employeeRepository.save(existingEmployeeData);
             return "Employee with ID number " + ID +" fields are successfully updated.";
         } else {
-            return "Employee with ID number "+ID + "doesn't exist";
+            return "Employee with ID number " + ID + "doesn't exist";
         }
+    }
+
+    //@Getmapping--Pagination
+    //Pagination-large dataset and we want to present it to the user in smaller chunks.
+    public List<Employee> listEmployeeByPageNumber(int pageNumber, int pageSize, String sortBy, String sortEmployee){
+        Sort sort;
+        if (sortEmployee.equalsIgnoreCase("DESC")){
+            sort=Sort.by(sortBy).descending();
+        }else {
+            sort=Sort.by(sortBy).ascending();
+        }
+
+        PageRequest pageRequest=PageRequest.of(pageNumber, pageSize, sort);
+        Page<EmployeeDTO> pageResponse =employeeRepository.findAll(pageRequest);
+
+        List<Employee> employees = new ArrayList<>();
+        for (
+                EmployeeDTO employeeDTO: pageResponse.getContent()){
+            Employee employee=new Employee();
+            employee.setEmpBatchID(employeeDTO.getEmpBatchID());
+            employee.setFirstName(employeeDTO.getFirstName());
+            employee.setLastName(employeeDTO.getLastName());
+            employee.setDob(employeeDTO.getDob());
+            employee.setAge(employeeDTO.getAge());
+            employee.setPosition(employeeDTO.getPosition());
+            employee.setPhoneNumber(employeeDTO.getPhoneNumber());
+            employee.setEmail(employeeDTO.getEmail());
+            employee.setAddress(employeeDTO.getAddress());
+            employee.setGender(employeeDTO.getGender());
+            //Adding employee list
+            employees.add(employee);
+        }
+        return employees;
     }
 }
