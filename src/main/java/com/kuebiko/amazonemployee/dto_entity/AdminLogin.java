@@ -1,6 +1,5 @@
 package com.kuebiko.amazonemployee.dto_entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
