@@ -1,0 +1,6 @@
+
+
+Tightly and Loosely Coupled
+In a tightly coupled application, two or more components that interact with
+one another are dependent and must be present and functioning at the same time.
+However, in a loosely coupled application, the components can function independently.

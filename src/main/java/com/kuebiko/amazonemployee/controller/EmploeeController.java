@@ -1,6 +1,5 @@
 package com.kuebiko.amazonemployee.controller;
 
-
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.service.EmployeeService;
@@ -79,10 +78,11 @@ public class EmploeeController {
     }
 
 
-    ////Pagination-large dataset and we want to present it to the user in smaller parts.
+    //Pagination-large dataset and we want to present it to the user in smaller parts.
     //Pagination Ex.-sortBy-Date,Name,Alphabet,Ascending,Descending etc
     //@Getmapping--http://localhost:8080/employee/action/list-employee-by-pagination
     @GetMapping(value = "/employee/action/list-employee-by-pagination")
+    //http://localhost:8080/employee/action/list-employee-by-pagination?pageNumber=0&pageSize=3&sortBy=emploeeID&sortEmployee=asc
     public ResponseEntity<?>listEmployeeByPagination(@RequestParam Integer pageNumber, @RequestParam Integer pageSize,
                                                      @RequestParam String sortBy, @RequestParam String sortEmployee){
         List<Employee> employeeList =employeeService.listEmployeeByPageNumber(pageNumber, pageSize, sortBy,sortEmployee);

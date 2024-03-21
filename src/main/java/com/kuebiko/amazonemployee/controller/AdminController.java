@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@CrossOrigin("http://localhost:4200/") //for frontend angular
-public class AdminController {
+//@CrossOrigin("http://localhost:4200/") //Angular connections from java(backend)
 
+public class AdminController {
     @Autowired
 
     private AdminService adminService;
@@ -28,7 +28,7 @@ public class AdminController {
     //In Postman---http://localhost:8080/admin/action/login
     @PostMapping("/admin/action/login")
     public ResponseEntity<String>validateAdmin(@RequestBody AdminLogin adminLogin){
-        //Postmapping--@Request only email and password to login---
+        //Postmapping--@Requestmapping only email and password to login---
         this.adminService.findByEmailAndPassword(adminLogin.getEmail(),adminLogin.getPassword());
         return ResponseEntity.ok(adminService.findByEmailAndPassword(adminLogin.getEmail(), adminLogin.getPassword()));
     }

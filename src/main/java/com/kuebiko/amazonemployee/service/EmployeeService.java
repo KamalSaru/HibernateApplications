@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,17 +20,17 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    //@PostMapping----Post/save all the employee details PostMapping----------
+    //@PostMapping--Post/save all the employee details PostMapping----------
     public void saveEmployee(EmployeeDTO employeeDTO){
         employeeRepository.save(employeeDTO);
     }
 
-    //@GetMapping---Getting all list of employee details------------------
+    //@GetMapping--Getting all list of employee details------------------
     public List<EmployeeDTO>getAllEmployeeDetails(){
         return employeeRepository.findAll();
     }
 
-    //@Getmapping---find the employee details using empBatchID--@Request param empBatchID
+    //@Getmapping--find the employee details using empBatchID--@Request param empBatchID
     public Employee getEmployeeByEmpBatchID(Long empBatchID){
         EmployeeDTO employeeDTO=employeeRepository.findByEmpBatchID(empBatchID);
         Employee employee=new Employee();
@@ -48,7 +47,7 @@ public class EmployeeService {
         return employee;
     }
 
-    //@GetMapping----getting method using empBatchID-------------------
+    //@GetMapping--getting method using empBatchID-------------------
     public EmployeeDTO getEmployeeDetailsByEmpBatchID(Long empBatchID){
         Optional<EmployeeDTO> employeeDTO= Optional.ofNullable((employeeRepository.findByEmpBatchID(empBatchID)));
         if (employeeDTO.isPresent()){
@@ -58,13 +57,13 @@ public class EmployeeService {
         }
     }
 
-    //@GetMapping-----Search/find employee details using first name-------------
+    //@GetMapping--Search/find employee details using first name-------------
     public List<EmployeeDTO> searchByEmployeeFirstName(String firstName){
         employeeRepository.findByFirstName(firstName);
         return employeeRepository.findByFirstName(firstName);
     }
 
-    //@DeleteMapping-----Delete employee using ID------------------------
+    //@DeleteMapping--Delete employee using ID------------------------
     public String deleteEmployeeByID(Long ID) {
         Optional<EmployeeDTO> employeeDTOOptional = employeeRepository.findById(ID);
         if (employeeDTOOptional.isPresent()) {
@@ -76,7 +75,7 @@ public class EmployeeService {
     }
 
 
-    //@PutMapping-----Edit/Update details using ID--------
+    //@PutMapping--Edit/Update details using ID--------
     public String updateEmployeeDetails(EmployeeDTO updateEmployeeInfo, Long ID){
         Optional<EmployeeDTO> employeeOptional = employeeRepository.findById(ID);
         if (employeeOptional.isPresent()){
@@ -94,13 +93,14 @@ public class EmployeeService {
 
             //Save the details-----
             employeeRepository.save(employeeDTO);
-            return "Employee with ID number "+ID + " updated successfully.";
+            return "Employee with ID number " + ID + " updated successfully.";
         } else {
-            return "Employee with ID number "+ID +" doesn't exit.";
+            //Handle the case where the order with the given orderId is not found
+            throw new RuntimeException("Employee with ID number " + ID + " doesn't exit.");
         }
     }
 
-    //@PatchMapping----------Patch method use to update partial field in the column(Replace update data)-------
+    //@PatchMapping--Patch method use to update partial field in the column(Replace update data)-------
     public String updateEmpDetailsPartially(@RequestBody EmployeeDTO updateEmployeeDetails, @PathVariable Long ID){
         Optional<EmployeeDTO> employeeDTOOptional=employeeRepository.findById(ID);
         if(employeeDTOOptional.isPresent()){
@@ -136,15 +136,15 @@ public class EmployeeService {
             if (updateEmployeeDetails.getGender() !=null){
                 existingEmployeeData.setGender(updateEmployeeDetails.getGender());
             }
-            //Save data after updating------
+            //Save the updated employee data------
             employeeRepository.save(existingEmployeeData);
-            return "Employee with ID number " + ID +" fields are successfully updated.";
+            return ("Employee with ID number " + ID +" fields are successfully updated.");
         } else {
             return "Employee with ID number " + ID + "doesn't exist";
         }
     }
 
-    //@Getmapping--Pagination
+    //@Get-mapping--Pagination------------
     //Pagination-large dataset and we want to present it to the user in smaller chunks.
     public List<Employee> listEmployeeByPageNumber(int pageNumber, int pageSize, String sortBy, String sortEmployee){
         Sort sort;

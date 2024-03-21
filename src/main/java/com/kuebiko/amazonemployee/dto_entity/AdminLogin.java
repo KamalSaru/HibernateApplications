@@ -7,9 +7,9 @@ import lombok.*;
 @Data
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+//@ToString
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Entity
 
 public class AdminLogin {
