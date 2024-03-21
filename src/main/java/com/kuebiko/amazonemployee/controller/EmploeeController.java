@@ -82,7 +82,7 @@ public class EmploeeController {
     //Pagination Ex.-sortBy-Date,Name,Alphabet,Ascending,Descending etc
     //@Getmapping--http://localhost:8080/employee/action/list-employee-by-pagination
     @GetMapping(value = "/employee/action/list-employee-by-pagination")
-    //http://localhost:8080/employee/action/list-employee-by-pagination?pageNumber=0&pageSize=3&sortBy=emploeeID&sortEmployee=asc
+    //http://localhost:8080/employee/action/list-employee-by-pagination?pageNumber=0&pageSize=3&sortBy=empBatchID&sortEmployee=asc
     public ResponseEntity<?>listEmployeeByPagination(@RequestParam Integer pageNumber, @RequestParam Integer pageSize,
                                                      @RequestParam String sortBy, @RequestParam String sortEmployee){
         List<Employee> employeeList =employeeService.listEmployeeByPageNumber(pageNumber, pageSize, sortBy,sortEmployee);

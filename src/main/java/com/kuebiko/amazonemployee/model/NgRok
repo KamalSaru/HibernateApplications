@@ -5,7 +5,7 @@
 --ngrok is a unified ingress platform because it combines all the components to
 deliver traffic from your services to the internet into one. ngrok consolidates
 together your reverse proxy, load balancer, API gateway, firewall, delivery
-network, DDoS protection and more.
+network, DDoS protection, testing and more.
 
 Installation
 -Download ngrok file
@@ -15,11 +15,13 @@ Installation
 -add authentication from account -ngrok config add-authtoken <token>
    my authentication token- 2dxNyqN6ZSyyY6r5jsL5DS5ZohK_37x8s1odA3qEfqFVhHQHd
    ngrok config add-authtoken 2dxNyqN6ZSyyY6r5jsL5DS5ZohK_37x8s1odA3qEfqFVhHQHd
+
 -Open ngrok app
 -Run----ngrok http 8080
 -Ctrl + Click on forwarding link--https://ee7c-71-179-31-165.ngrok-free.app/
 -Ctrl + C for Quite
+
 -my localhost--http://localhost:8080/employee/action/get-all
--Replace the ngrok url instead of localhost8080
+-Replace the ngrok url instead of http://localhost:8080
 -ngrok url-- https://7c88-71-179-31-165.ngrok-free.app----this change everytime
 -https://7c88-71-179-31-165.ngrok-free.app/employee/action/get-all

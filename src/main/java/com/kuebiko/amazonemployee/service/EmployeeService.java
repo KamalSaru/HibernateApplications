@@ -3,6 +3,7 @@ package com.kuebiko.amazonemployee.service;
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.repository.EmployeeRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -146,6 +149,7 @@ public class EmployeeService {
 
     //@Get-mapping--Pagination------------
     //Pagination-large dataset and we want to present it to the user in smaller chunks.
+    //http://localhost:8080/employee/action/list-employee-by-pagination?pageNumber=0&pageSize=3&sortBy=empBatchID&sortEmployee=asc
     public List<Employee> listEmployeeByPageNumber(int pageNumber, int pageSize, String sortBy, String sortEmployee){
         Sort sort;
         if (sortEmployee.equalsIgnoreCase("DESC")){
@@ -175,5 +179,14 @@ public class EmployeeService {
             employees.add(employee);
         }
         return employees;
+    }
+
+    @PostConstruct
+    //annotation is used on a method that needs to be executed after dependency injection is done to perform any initialization
+    //url from ngRok--https://7c88-71-179-31-165.ngrok-free.app/employee/action/get-all
+    public void callAPI(){
+        RestTemplate restTemplate=new RestTemplate();
+        String response = restTemplate.getForObject("https://7c88-71-179-31-165.ngrok-free.app/employee/action/get-all", String.class);
+        System.out.println("response : " +response);
     }
 }
