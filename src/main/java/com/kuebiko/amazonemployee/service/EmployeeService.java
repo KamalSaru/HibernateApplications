@@ -103,40 +103,40 @@ public class EmployeeService {
     }
 
     //@PatchMapping--Patch method use to update partial field in the column(Replace update data)-------
-    public String updateEmpDetailsPartially(@RequestBody EmployeeDTO updateEmployeeDetails, @PathVariable Long ID){
+    public String updateEmpDetailsPartiallyField(@RequestBody EmployeeDTO updateEmployeeDetailsField, @PathVariable Long ID){
         Optional<EmployeeDTO> employeeDTOOptional=employeeRepository.findById(ID);
         if(employeeDTOOptional.isPresent()){
             //Exist/catch data and update necessary field--------
             EmployeeDTO existingEmployeeData =employeeDTOOptional.get();
-            if (updateEmployeeDetails.getEmpBatchID() !=null){
-                existingEmployeeData.setEmpBatchID(updateEmployeeDetails.getEmpBatchID());
+            if (updateEmployeeDetailsField.getEmpBatchID() !=null){
+                existingEmployeeData.setEmpBatchID(updateEmployeeDetailsField.getEmpBatchID());
             }
-            if (updateEmployeeDetails.getFirstName() !=null){
-                existingEmployeeData.setFirstName(updateEmployeeDetails.getFirstName());
+            if (updateEmployeeDetailsField.getFirstName() !=null){
+                existingEmployeeData.setFirstName(updateEmployeeDetailsField.getFirstName());
             }
-            if (updateEmployeeDetails.getLastName() !=null){
-                existingEmployeeData.setLastName(updateEmployeeDetails.getLastName());
+            if (updateEmployeeDetailsField.getLastName() !=null){
+                existingEmployeeData.setLastName(updateEmployeeDetailsField.getLastName());
             }
-            if (updateEmployeeDetails.getDob() !=null){
-                existingEmployeeData.setDob(updateEmployeeDetails.getDob());
+            if (updateEmployeeDetailsField.getDob() !=null){
+                existingEmployeeData.setDob(updateEmployeeDetailsField.getDob());
             }
-            if (updateEmployeeDetails.getAge() !=null){
-                existingEmployeeData.setAge(updateEmployeeDetails.getAge());
+            if (updateEmployeeDetailsField.getAge() !=null){
+                existingEmployeeData.setAge(updateEmployeeDetailsField.getAge());
             }
-            if (updateEmployeeDetails.getPosition() !=null){
-                existingEmployeeData.setPosition(updateEmployeeDetails.getPosition());
+            if (updateEmployeeDetailsField.getPosition() !=null){
+                existingEmployeeData.setPosition(updateEmployeeDetailsField.getPosition());
             }
-            if (updateEmployeeDetails.getPhoneNumber() !=null){
-                existingEmployeeData.setPhoneNumber(updateEmployeeDetails.getPhoneNumber());
+            if (updateEmployeeDetailsField.getPhoneNumber() !=null){
+                existingEmployeeData.setPhoneNumber(updateEmployeeDetailsField.getPhoneNumber());
             }
-            if (updateEmployeeDetails.getEmail() !=null){
-                existingEmployeeData.setEmail(updateEmployeeDetails.getEmail());
+            if (updateEmployeeDetailsField.getEmail() !=null){
+                existingEmployeeData.setEmail(updateEmployeeDetailsField.getEmail());
             }
-            if (updateEmployeeDetails.getAddress() !=null){
-                existingEmployeeData.setAddress(updateEmployeeDetails.getAddress());
+            if (updateEmployeeDetailsField.getAddress() !=null){
+                existingEmployeeData.setAddress(updateEmployeeDetailsField.getAddress());
             }
-            if (updateEmployeeDetails.getGender() !=null){
-                existingEmployeeData.setGender(updateEmployeeDetails.getGender());
+            if (updateEmployeeDetailsField.getGender() !=null){
+                existingEmployeeData.setGender(updateEmployeeDetailsField.getGender());
             }
             //Save the updated employee data------
             employeeRepository.save(existingEmployeeData);
