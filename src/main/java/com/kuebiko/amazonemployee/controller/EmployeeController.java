@@ -1,19 +1,23 @@
 package com.kuebiko.amazonemployee.controller;
 
+import com.kuebiko.amazonemployee.model.PdfGeneratorUtil;
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController//used to create REST ful web services using Spring MVC, Mapping request data
 //@RequestMapping("employee")//used to map web requests onto specific handler classes and/or handler methods
 //@CrossOrigin("http://localhost:4200/") //Angular connections from java(backend)
 
-public class EmploeeController {
+public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
@@ -88,5 +92,42 @@ public class EmploeeController {
         List<Employee> employeeList =employeeService.listEmployeeByPageNumber(pageNumber, pageSize, sortBy,sortEmployee);
         ResponseEntity responseEntity=new ResponseEntity<>(employeeList, HttpStatus.OK);
         return responseEntity;
+    }
+
+    //Convert to the PDF files
+    @GetMapping(value = "/employee/action/convert-pdf-file")
+    //@Getmapping--http://localhost:8080/employee/action/convert-pdf-file
+    //If you put this url in Browser you will get pdf file-----employee_details.pdf
+    public ResponseEntity<byte[]> downloadActivitiesReport() {
+        // Fetch employee data from the service
+        List<EmployeeDTO> employees = employeeService.getAllEmployeeDetails();
+
+        // Check if there are any employees
+        if (employees.isEmpty()) {
+            // Return 204 No Content if there are no employees
+            return ResponseEntity.noContent().build();
+        }
+
+        byte[] contents;
+        try {
+            contents = PdfGeneratorUtil.generateEmployeeDetailsPDF(employees);
+        } catch (Exception e) {
+            // Logging the error can help in debugging later
+            e.printStackTrace();
+            // Consider using a logger like SLF4J in real-world applications
+            // Logging the error can help in debugging
+            // Return 500 Internal Server Error if an exception occurs
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error occurred while generating the PDF.".getBytes());
+        }
+
+        // Set response headers for the PDF file download
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        String filename = "employee_details.pdf";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return new ResponseEntity<>(contents, headers, HttpStatus.OK);
     }
 }

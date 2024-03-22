@@ -2,6 +2,7 @@ package com.kuebiko.amazonemployee.dto_entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -124,4 +125,5 @@ public class EmployeeDTO {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 }

@@ -3,7 +3,6 @@ package com.kuebiko.amazonemployee.service;
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.repository.EmployeeRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +27,7 @@ public class EmployeeService {
     }
 
     //@GetMapping--Getting all list of employee details------------------
+    //@GetMapping--connected to the PDFGeneratorUtil---download employee_details.pdf
     public List<EmployeeDTO>getAllEmployeeDetails(){
         return employeeRepository.findAll();
     }
@@ -181,12 +180,13 @@ public class EmployeeService {
         return employees;
     }
 
-    @PostConstruct
+    /*@PostConstruct
     //annotation is used on a method that needs to be executed after dependency injection is done to perform any initialization
     //url from ngRok--https://7c88-71-179-31-165.ngrok-free.app/employee/action/get-all
     public void callAPI(){
         RestTemplate restTemplate=new RestTemplate();
         String response = restTemplate.getForObject("https://7c88-71-179-31-165.ngrok-free.app/employee/action/get-all", String.class);
         System.out.println("response : " +response);
-    }
+    }*/
+
 }
