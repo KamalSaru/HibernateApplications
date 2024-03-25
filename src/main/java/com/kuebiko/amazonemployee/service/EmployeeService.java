@@ -26,6 +26,17 @@ public class EmployeeService {
         employeeRepository.save(employeeDTO);
     }
 
+
+    //@GetMapping--getting method using ID-------------------
+    public EmployeeDTO getEmployeeByID(Long ID) {
+        Optional<EmployeeDTO> employeeDTO=employeeRepository.findById(ID);
+        if (employeeDTO.isPresent()){
+            return employeeDTO.get();
+        }else {
+            return null;
+        }
+    }
+
     //@GetMapping--Getting all list of employee details------------------
     //@GetMapping--connected to the PDFGeneratorUtil---download employee_details.pdf
     public List<EmployeeDTO>getAllEmployeeDetails(){
@@ -189,4 +200,10 @@ public class EmployeeService {
         System.out.println("response : " +response);
     }*/
 
+
+    //@GetMapping--getting method using ID-------------------for pdf
+    public EmployeeDTO findEmployeeByID(Long ID) {
+        // Implement logic to fetch employee by ID from repository
+        return employeeRepository.findById(ID).orElse(null);
+    }
 }

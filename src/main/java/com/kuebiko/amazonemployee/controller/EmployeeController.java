@@ -1,8 +1,8 @@
 package com.kuebiko.amazonemployee.controller;
 
-import com.kuebiko.amazonemployee.model.PdfGeneratorUtil;
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
+import com.kuebiko.amazonemployee.model.PdfGeneratorUtil;
 import com.kuebiko.amazonemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,12 +29,20 @@ public class EmployeeController {
         return "Employee details save successfully.";
     }
 
+    //@GetMapping--getting method using ID-------------------
+    //Getmapping--http://localhost:8080/employee/action/find-by-id/15
+    @GetMapping(value = "/employee/action/find-by-id/{ID}")
+    public ResponseEntity<?> getEmployeeByID(@PathVariable("ID") Long ID){
+        return ResponseEntity.ok(employeeService.getEmployeeByID(ID));
+    }
+
     @GetMapping(value = "/employee/action/get-all")
     //Getting all list of employee details------------------
     //Getmapping----http://localhost:8080/employee/action/get-all
     public ResponseEntity<List<EmployeeDTO>>getAllEmployeeDetails(){
         return new ResponseEntity<>(employeeService.getAllEmployeeDetails(),HttpStatus.OK);
     }
+
 
     @GetMapping(value = "/employee/action/get-by-id")
     //Getmapping--find the employee details using empBatchID--@Request param empBatchID
@@ -94,6 +102,7 @@ public class EmployeeController {
         return responseEntity;
     }
 
+
     //Convert to the PDF files
     @GetMapping(value = "/employee/action/convert-pdf-file")
     //@Getmapping--http://localhost:8080/employee/action/convert-pdf-file
@@ -130,4 +139,12 @@ public class EmployeeController {
 
         return new ResponseEntity<>(contents, headers, HttpStatus.OK);
     }
+
+    //Getmapping---get employee details in pdf files using ID
+    @GetMapping(value = "/employee/action/convert-pdf-file/{ID}")
+    public ResponseEntity<?> downloadPDFEmployeeDetailsByID(@PathVariable("ID") Long ID) {
+        EmployeeDTO employee = employeeService.findEmployeeByID(ID);
+        return new ResponseEntity<>(employeeService.findEmployeeByID(ID), HttpStatus.OK);
+    }
+
 }

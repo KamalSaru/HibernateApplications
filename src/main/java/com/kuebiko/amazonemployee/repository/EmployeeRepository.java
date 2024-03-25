@@ -11,6 +11,10 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<EmployeeDTO, Long> {
     //In Postman---http://localhost:8080/employee/search/------------
 
+    //Getmapping ----getEmployeeByID
+    List<EmployeeDTO>getEmployeeByID(Long ID);
+
+
     //@GetMapping-----Search/find employee details using first name-------------
     List<EmployeeDTO>findByFirstName(String firstName);
 

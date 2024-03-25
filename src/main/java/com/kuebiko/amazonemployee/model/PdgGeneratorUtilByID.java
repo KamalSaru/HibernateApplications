@@ -1,26 +1,24 @@
 package com.kuebiko.amazonemployee.model;
 
-import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
+
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-public class PdfGeneratorUtil {
+public class PdgGeneratorUtilByID {
 
-    //@Getmapping--http://localhost:8080/employee/action/convert-pdf-file
-    //If you put this url in Browser you will get pdf file-----employee_details.pdf
-    //Connect ot the service and controller-------------------------
-    public static byte[] generateEmployeeDetailsPDF(List<EmployeeDTO> employees) {
+    public static byte[] downloadPDFEmployeeDetailsByID(List<EmployeeDTO> employee1) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, outputStream);
             document.open();
 
-            for (EmployeeDTO employee : employees) {
+            for (EmployeeDTO employee : employee1) {
                 //System.out.println("Employee_Details");
                 document.add(new Paragraph("Employee Batch ID: " + employee.getEmpBatchID()));
                 document.add(new Paragraph("First Name: " + employee.getFirstName()));
