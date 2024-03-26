@@ -3,6 +3,7 @@ package com.kuebiko.amazonemployee.controller;
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.kuebiko.amazonemployee.model.Employee;
 import com.kuebiko.amazonemployee.model.PdfGeneratorUtil;
+import com.kuebiko.amazonemployee.model.PdgGeneratorUtilByID;
 import com.kuebiko.amazonemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -141,10 +142,29 @@ public class EmployeeController {
     }
 
     //Getmapping---get employee details in pdf files using ID
+    //Getmapping---http://localhost:8080/employee/action/convert-pdf-file/7
     @GetMapping(value = "/employee/action/convert-pdf-file/{ID}")
-    public ResponseEntity<?> downloadPDFEmployeeDetailsByID(@PathVariable("ID") Long ID) {
-        EmployeeDTO employee = employeeService.findEmployeeByID(ID);
-        return new ResponseEntity<>(employeeService.findEmployeeByID(ID), HttpStatus.OK);
-    }
+    public ResponseEntity<byte[]> downloadPDFEmployeeDetailsByID(@PathVariable("ID") Long ID) {
+        EmployeeDTO employee1= employeeService.findEmployeeByID(ID);
+        if (employee1==null) {
+            return ResponseEntity.noContent().build();
+        }
 
+        byte[] content;
+        try {
+            content = PdgGeneratorUtilByID.generateEmployeeDetailsPDFByID(employee1);
+        } catch (Exception e) { // Catch specific exception type if available
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error occurred while generating the PDF.".getBytes());
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        String filename = "employee_details.pdf";
+        headers.setContentDispositionFormData("attachment", filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return new ResponseEntity<>(content, headers, HttpStatus.OK);
+    }
 }

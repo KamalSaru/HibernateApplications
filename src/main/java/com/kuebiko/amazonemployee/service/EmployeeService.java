@@ -201,7 +201,7 @@ public class EmployeeService {
     }*/
 
 
-    //@GetMapping--getting method using ID-------------------for pdf
+    //@GetMapping--getting method using ID--for pdf file download
     public EmployeeDTO findEmployeeByID(Long ID) {
         // Implement logic to fetch employee by ID from repository
         return employeeRepository.findById(ID).orElse(null);

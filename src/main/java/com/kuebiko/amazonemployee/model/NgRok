@@ -24,4 +24,5 @@ Installation
 -my localhost--http://localhost:8080/employee/action/get-all
 -Replace the ngrok url instead of http://localhost:8080
 -ngrok url-- https://7c88-71-179-31-165.ngrok-free.app----this change everytime
+-For Ex.
 -https://7c88-71-179-31-165.ngrok-free.app/employee/action/get-all
