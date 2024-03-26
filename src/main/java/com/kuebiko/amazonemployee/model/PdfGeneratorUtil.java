@@ -22,6 +22,11 @@ public class PdfGeneratorUtil {
 
             for (EmployeeDTO employee : employees) {
                 //System.out.println("Employee_Details");
+
+                document.add(new Paragraph("Amazon Employees List Details"));
+                document.add(new Paragraph("Baltimore MD USA"));
+                document.add(new Paragraph("----------------------------------------------------------"));
+                document.add(new Paragraph("\n")); //Break the line
                 document.add(new Paragraph("Employee Batch ID: " + employee.getEmpBatchID()));
                 document.add(new Paragraph("First Name: " + employee.getFirstName()));
                 document.add(new Paragraph("Last Name: " + employee.getLastName()));
@@ -32,6 +37,10 @@ public class PdfGeneratorUtil {
                 document.add(new Paragraph("Email: " + employee.getEmail()));
                 document.add(new Paragraph("Address: " + employee.getAddress()));
                 document.add(new Paragraph("Gender: " + employee.getGender()));
+                document.add(new Paragraph("\n")); //Break the line
+                document.add(new Paragraph("----------------------------------------------------------"));
+                document.add(new Paragraph("More Info@www.amazonemp.com"));
+                document.add(new Paragraph("Thank you!!!"));
                 document.add(new Paragraph("\n"));
             }
 

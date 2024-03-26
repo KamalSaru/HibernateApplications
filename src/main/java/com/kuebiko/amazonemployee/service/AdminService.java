@@ -23,7 +23,7 @@ public class AdminService {
         if (administration.isPresent()){
             return "Admin login successfully.";
         } else {
-            return "Invalid admin email or password.";
+            return "Invalid email or password.";
         }
     }
 }
