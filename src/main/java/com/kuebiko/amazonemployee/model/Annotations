@@ -1,0 +1,50 @@
+
+
+Annotation--
+an annotation is a form of metadata that provides additional information about code
+elements. Annotations do not directly affect the execution of a program, but they can
+be used by the compiler, runtime environment, or other tools to generate code, perform
+optimizations, or configure behavior.
+
+-@SpringBootApplication
+prominent class of multiple annotations that combines three other Spring Boot annotations,
+such as @ComponentScan, @Configuration, and @EnableAutoConfiguration. It is placed in the
+root package and a meta-annotation of the application.
+
+-@Configuration
+class-based annotation that defines one or more bean methods in the class. The purpose of a
+configuration class is to indicate the application context, like service and other application
+components.
+
+-@PathVariable
+used to measure dynamic parameters from the request URI and map them to method parameters in a controller.
+The annotation helps develop RESTful web services, allowing you to manage variable parameters
+
+-@RequestBody
+indicates a method parameter that binds the HTTP request body in the controller method. The request’s
+body is mapped when users send requests to the server.
+
+-@Autowired
+used to inject the dependency of one bean into another. The spring-managed object is implemented into another
+object that a class needs to perform.
+
+-@RestController
+combines the functionality of @Respondbody and @Controller annotations. The annotation makes creating RESTful
+endpoints that return XML, JSON, and other types of responses easier and also used to respond to plain text,
+ images, or PDF documents.
+
+-@Bean
+method-level annotation widely used in Spring Boot applications. Bean annotation is a direct analog of the
+XML element, which indicates that the Spring container should register a method.
+
+-@EnableAutoConfiguration
+allows the automatic configuration of your Spring Boot applications. Enable Auto Configuration annotations to
+define the Spring components and configure them automatically.
+
+-@Components
+used to mark the Java class in the Spring applications. The Spring IoC container manages the component
+annotations and is responsible for the lifecycle of the components, such as initializing, creating, or destroying them.
+
+-@Repository
+used to interact with different databases, such as NoSQL databases and relational databases. Also, when a Java class
+ is marked with @Repository annotation, Spring Boot automatically creates and adds the required context.

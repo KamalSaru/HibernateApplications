@@ -1,0 +1,30 @@
+
+
+
+Joining Table
+
+--One to Many--
+In a one-to-many relationship, a single instance of one entity is associated with multiple instances of another entity.
+For example, a department may have many employees.
+Join Table Mapping (Preferred for One-to-Many):
+    In this approach, you use a join table to represent the relationship between the entities.
+    Each row in the join table contains a foreign key reference to both the "one" side and the "many" side entities.
+    You typically use @OneToMany annotation on the "one" side entity to establish the relationship.
+
+
+--Many to One--
+In a many-to-one relationship, multiple instances of one entity are associated with a single instance of another entity.
+For example, many employees may belong to a single department.
+Foreign Key Mapping (Preferred for Many-to-One):
+    -In this approach, the "many" side entity (e.g., Employee) has a reference to the "one" side entity (e.g., Department)
+     using a foreign key.
+    -You typically use @ManyToOne annotation on the "many" side entity to establish the relationship.
+    The "many" side entity holds a reference to the "one" side entity using a foreign key column.
+
+
+--Which to Choose:-
+    -Foreign Key Mapping for Many-to-One: This is the preferred approach for many-to-one relationships. It's straightforward
+    and efficient, as it uses a simple foreign key in the "many" side table.
+    -Join Table Mapping for One-to-Many: This is the preferred approach for one-to-many relationships. It provides more
+    flexibility, especially if you need to add additional attributes to the relationship or if you have a many-to-many
+    relationship that may evolve into a one-to-many relationship in the future.
