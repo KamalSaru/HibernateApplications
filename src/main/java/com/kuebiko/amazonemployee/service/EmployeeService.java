@@ -1,8 +1,8 @@
 package com.kuebiko.amazonemployee.service;
 
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
-import com.kuebiko.amazonemployee.model.Employee;
-import com.kuebiko.amazonemployee.repository.EmployeeRepository;
+import com.kuebiko.amazonemployee.model_Class.Employee;
+import com.kuebiko.amazonemployee.dao_repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -203,7 +203,7 @@ public class EmployeeService {
 
     //@GetMapping--getting method using ID--for pdf file download
     public EmployeeDTO findEmployeeByID(Long ID) {
-        // Implement logic to fetch employee by ID from repository
+        // Implement logic to fetch employee by ID from dao_repository
         return employeeRepository.findById(ID).orElse(null);
     }
 }

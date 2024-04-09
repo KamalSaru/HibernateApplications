@@ -1,4 +1,4 @@
-package com.kuebiko.amazonemployee.dto_entity;
+package com.kuebiko.amazonemployee.dto_entity_Testing;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,8 +32,8 @@ public class AdminLoginAuthentication {
     //@NotBlank(message="Please provide email address.")
     private String email;
 
-    @Min(value=6, message="Minimum six character.")
-    @Max(value=10, message="Maximum ten character.")
+    //@Min(value=6, message="Minimum six character.")
+    //@Max(value=10, message="Maximum ten character.")
     private String password;
 
     //@Min(value=6, message="Minimum six digit.")

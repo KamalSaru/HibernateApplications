@@ -1,4 +1,4 @@
-package com.kuebiko.amazonemployee.model;
+package com.kuebiko.amazonemployee.model_Class;
 
 import java.time.LocalDate;
 

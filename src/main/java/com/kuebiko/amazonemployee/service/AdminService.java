@@ -1,7 +1,7 @@
 package com.kuebiko.amazonemployee.service;
 
 import com.kuebiko.amazonemployee.dto_entity.AdminLogin;
-import com.kuebiko.amazonemployee.repository.AdminRepository;
+import com.kuebiko.amazonemployee.dao_repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;

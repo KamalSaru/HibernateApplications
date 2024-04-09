@@ -14,10 +14,13 @@ public class EmployeeDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@SequenceGenerator(name="ID_generator", sequenceName = "Employee_sequence")
 
     private Long ID;
-    @Column(name = "emp_BatchID")
+    @Column(name = "emp_BatchID", unique = true)
     private Long empBatchID;
+
+    //@NotBlank(message = "Please provide first name")
     private String firstName;
     private String lastName;
     @Column(name="date_of_birth")
@@ -36,8 +39,11 @@ public class EmployeeDTO {
     }
 
     private String position;
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private Long phoneNumber;
+
+    @Column(name = "email", unique = true)
+    //@Email(message = "Please provide email address")
     private String email;
     private String address;
     private String gender;

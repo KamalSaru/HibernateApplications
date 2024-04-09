@@ -1,4 +1,4 @@
-package com.kuebiko.amazonemployee.model;
+package com.kuebiko.amazonemployee.model_Class;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
 
 public class PdgGeneratorUtilByID {
 
-    //Getmapping---get employee details in pdf files using ID
+    //Getmapping---get employee details in pdf note_Files using ID
     //http://localhost:8080/employee/action/convert-pdf-file/7
     public static byte[] generateEmployeeDetailsPDFByID(EmployeeDTO employee1) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

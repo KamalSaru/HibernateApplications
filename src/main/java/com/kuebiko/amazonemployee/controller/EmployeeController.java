@@ -1,9 +1,9 @@
 package com.kuebiko.amazonemployee.controller;
 
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
-import com.kuebiko.amazonemployee.model.Employee;
-import com.kuebiko.amazonemployee.model.PdfGeneratorUtil;
-import com.kuebiko.amazonemployee.model.PdgGeneratorUtilByID;
+import com.kuebiko.amazonemployee.model_Class.Employee;
+import com.kuebiko.amazonemployee.model_Class.PdfGeneratorUtil;
+import com.kuebiko.amazonemployee.model_Class.PdgGeneratorUtilByID;
 import com.kuebiko.amazonemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,16 +25,26 @@ public class EmployeeController {
     @PostMapping(value = "/employee/action/insert") //No need @Request Mapping "employee"
     //Posting employee details information--------------
     //In PostMan Postmapping------http://localhost:8080/employee/action/insert
-    public String saveEmployee(@RequestBody EmployeeDTO employeeDTO){
-        employeeService.saveEmployee(employeeDTO);
-        return "Employee details save successfully.";
+    public ResponseEntity<String> saveEmployee(@RequestBody EmployeeDTO employeeDTO){
+        try {
+            employeeService.saveEmployee(employeeDTO);
+            return ResponseEntity.ok("Employee details saved successfully.");
+        } catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
+                    body("Failed to save employee detail: " +e.getMessage());
+        }
     }
 
     //@GetMapping--getting method using ID-------------------
     //Getmapping--http://localhost:8080/employee/action/find-by-id/15
     @GetMapping(value = "/employee/action/find-by-id/{ID}")
     public ResponseEntity<?> getEmployeeByID(@PathVariable("ID") Long ID){
-        return ResponseEntity.ok(employeeService.getEmployeeByID(ID));
+        try {
+            EmployeeDTO employee =employeeService.getEmployeeByID(ID);
+            return ResponseEntity.ok().body(employee);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping(value = "/employee/action/get-all")
@@ -104,12 +114,12 @@ public class EmployeeController {
     }
 
 
-    //Convert to the PDF files
+    //Convert to the PDF note_Files
     @GetMapping(value = "/employee/action/convert-pdf-file")
     //@Getmapping--http://localhost:8080/employee/action/convert-pdf-file
     //If you put this url in Browser you will get pdf file-----employee_details.pdf
     public ResponseEntity<byte[]> downloadActivitiesReport() {
-        // Fetch employee data from the service
+        // Fetch list of employee data from the service
         List<EmployeeDTO> employees = employeeService.getAllEmployeeDetails();
 
         // Check if there are any employees
@@ -141,10 +151,11 @@ public class EmployeeController {
         return new ResponseEntity<>(contents, headers, HttpStatus.OK);
     }
 
-    //Getmapping---get employee details in pdf files using ID
+    //Getmapping---get employee details in pdf note_Files using ID
     //Getmapping---http://localhost:8080/employee/action/convert-pdf-file/7
     @GetMapping(value = "/employee/action/convert-pdf-file/{ID}")
     public ResponseEntity<byte[]> downloadPDFEmployeeDetailsByID(@PathVariable("ID") Long ID) {
+        // Fetch employee data using ID from the service
         EmployeeDTO employee1= employeeService.findEmployeeByID(ID);
         if (employee1==null) {
             return ResponseEntity.noContent().build();

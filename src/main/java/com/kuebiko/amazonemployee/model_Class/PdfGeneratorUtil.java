@@ -1,4 +1,4 @@
-package com.kuebiko.amazonemployee.model;
+package com.kuebiko.amazonemployee.model_Class;
 
 import com.kuebiko.amazonemployee.dto_entity.EmployeeDTO;
 import com.itextpdf.text.Document;
@@ -13,7 +13,7 @@ public class PdfGeneratorUtil {
     //@Getmapping--http://localhost:8080/employee/action/convert-pdf-file
     //If you put this url in Browser you will get pdf file-----employee_details.pdf
     //Connect ot the service and controller-------------------------
-    public static byte[] generateEmployeeDetailsPDF(List<EmployeeDTO> employees) {
+    public static byte[] generateEmployeeDetailsPDF(List<EmployeeDTO> employees) { //List of employee
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             Document document = new Document();
