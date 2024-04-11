@@ -42,7 +42,7 @@ BarCode and QR Code Create--------------------------------
         </dependency>
 
 
-JSON Web Token (JWT) library called "jjwt" ---------------------------------
+JSON Web Token(JWT) library called "jjwt" ---------------------------------
         <dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>

@@ -1,0 +1,7 @@
+
+
+--Use of Jwt Token---
+JSON Web Tokens (JWTs) are a standardized way to securely send data between
+two parties. They contain information (claims) encoded in the JSON format.
+These claims help share specific details between the parties involved. At its
+core, a JWT is a mechanism for verifying the authenticity of some JSON data.

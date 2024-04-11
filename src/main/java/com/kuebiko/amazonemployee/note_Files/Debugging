@@ -7,5 +7,5 @@ any software. When software does not work as expected, computer programmers stud
 code to determine why any errors occurred.
 
 -Click the Point Break to debug
--Hit the PostMan API--any
--If working the method, we can see the selection line.
+-Hit the PostMan API--any of the method
+-If working the method, we can see the selection line in blue in method class.

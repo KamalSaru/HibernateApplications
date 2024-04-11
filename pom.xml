@@ -73,10 +73,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-		<!--<dependency>
+		<!--Need this dependency for Basic and advance spring security-->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>-->
+		</dependency>
 
 	</dependencies>
 
